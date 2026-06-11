@@ -7,20 +7,36 @@
 <body>
   <header>
     <nav>
-      <a href="./test-ok.html">OK</a> |
-      <a href="./test-text-missing.html">文言NG</a> |
-      <a href="./test-html-br.html">HTML NG</a> |
+      <a href="./fresh-food.html">生もの食品ページ</a> |
+      <a href="./processed-food.html">加工食品ページ</a> |
+      <a href="./alcohol.html">お酒ページ</a> |
       <a href="./test-scope.html">範囲チェック</a> |
-      <a href="./test-edge.html">境界ケース</a>
+      <a href="./test-html-br.html">HTML NG</a> |
+      <a href="./test-text-missing.html">文言NG</a>
     </nav>
   </header>
 
   <!-- main をあえて作らない -->
-  <section>
+  <section class="textArea1">
     <h1>境界ケーステスト</h1>
-
-    <p>mainタグがないページです。</p>
-    <p>document.body にフォールバックするか確認します。</p>
+    <p>送料は無料です。</p>
   </section>
+
+  <h4>注意事項</h4>
+<ul class="bc-result-list">
+  <li class="bc-result-item is-ng">
+    <div class="bc-result-label"><span>❌</span><strong>「賞味期限をご確認の上、早めにお召し上がりください。」</strong></div>
+    <p class="bc-result-message">指定エリア内に対象のテキストがありません</p>
+  </li>
+</ul>
+
+<h4>その他</h4>
+<ul class="bc-result-list">
+  <li class="bc-result-item is-ng">
+    <div class="bc-result-label"><span>❌</span><strong>賞味期限</strong></div>
+    <p class="bc-result-message">指定エリア内に対象のテキストがありません</p>
+  </li>
+</ul>
+
 </body>
 </html>

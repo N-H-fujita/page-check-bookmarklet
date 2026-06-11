@@ -7,30 +7,39 @@
 <body>
   <header>
     <nav>
-      <a href="./test-ok.html">OK</a> |
-      <a href="./test-text-missing.html">文言NG</a> |
-      <a href="./test-html-br.html">HTML NG</a> |
+      <a href="./fresh-food.html">生もの食品ページ</a> |
+      <a href="./processed-food.html">加工食品ページ</a> |
+      <a href="./alcohol.html">お酒ページ</a> |
       <a href="./test-scope.html">範囲チェック</a> |
-      <a href="./test-edge.html">境界ケース</a>
+      <a href="./test-html-br.html">HTML NG</a> |
+      <a href="./test-text-missing.html">文言NG</a>
     </nav>
   </header>
 
   <aside>
     <h2>サイドメニュー</h2>
-    <p>送料無料</p>
-    <p>返品可能</p>
-    <p>期間限定</p>
+    <p>送料は無料です。</p>
+    <p>生ものですので、お早めにお召し上がりください。</p>
+    <p>賞味期限:</p>
   </aside>
 
   <main>
     <h1>範囲チェックテスト</h1>
 
-    <p>価格は税込です。</p>
-    <p>キャンペーンを実施中です。</p>
-    <p>お問い合わせはこちらです。</p>
-    <p>会社概要をご確認ください。</p>
+    <section class="textArea1">
+      <h2>商品説明</h2>
+      <p>商品説明エリアには送料文言がありません。</p>
+    </section>
 
-    <!-- 送料無料 / 返品可能 / 期間限定 は aside にだけ存在する -->
+    <section class="textArea2">
+      <h2>注意事項</h2>
+      <p>注意事項エリアには対象文言がありません。</p>
+    </section>
+
+    <section class="textArea3">
+      <h2>その他</h2>
+      <p>その他エリアには対象文言がありません。</p>
+    </section>
   </main>
 </body>
 </html>
