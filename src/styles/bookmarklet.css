@@ -85,6 +85,17 @@
   border-radius: 8px;
 }
 
+
+.bc-area-result-groups {
+  display: grid;
+  gap: 14px;
+}
+
+.bc-area-title {
+  margin: 0 0 8px;
+  font-size: 14px;
+}
+
 .bc-result-list {
   margin: 0;
   padding: 0;
