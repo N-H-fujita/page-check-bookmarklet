@@ -18,13 +18,7 @@ const textCheckGroups = [
     id: "common",
     label: "共通文言",
     rules: {
-      textArea1: [
-        {
-          id: "free-shipping",
-          label: "送料無料文言",
-          expectedText: "送料は無料です。",
-        },
-      ],
+      textArea1: ["送料は無料です。"],
     },
   },
   {
@@ -32,16 +26,8 @@ const textCheckGroups = [
     label: "生もの",
     rules: {
       textArea2: [
-        {
-          id: "fresh-food-notice",
-          label: "生もの注意文言",
-          expectedText: "生ものですので、お早めにお召し上がりください。",
-        },
-        {
-          id: "remote-island-notice",
-          label: "離島販売不可文言",
-          expectedText: "離島への販売は行っておりません。",
-        },
+        "生ものですので、お早めにお召し上がりください。",
+        "離島への販売は行っておりません。",
       ],
     },
   },
@@ -49,41 +35,16 @@ const textCheckGroups = [
     id: "processedFood",
     label: "加工食品",
     rules: {
-      textArea2: [
-        {
-          id: "expiration-notice",
-          label: "賞味期限注意文言",
-          expectedText: "賞味期限をご確認の上、早めにお召し上がりください。",
-        },
-      ],
-      textArea3: [
-        {
-          id: "expiration-label",
-          label: "賞味期限",
-          expectedText: "賞味期限:",
-        },
-      ],
+      textArea2: ["賞味期限をご確認の上、早めにお召し上がりください。"],
+      textArea3: ["賞味期限:"],
     },
   },
   {
     id: "alcohol",
     label: "お酒",
     rules: {
-      textArea1: [
-        {
-          id: "alcohol-percent",
-          label: "アルコール度数表示",
-          expectedPattern: /アルコール度数\d+(\.\d+)?%です。/,
-          expectedText: "アルコール度数〇%です。",
-        },
-      ],
-      textArea2: [
-        {
-          id: "minor-prohibited",
-          label: "未成年販売禁止文言",
-          expectedText: "未成年への販売は法律で禁止されております。",
-        },
-      ],
+      textArea1: [/アルコール度数\d+(\.\d+)?%です。/],
+      textArea2: ["未成年への販売は法律で禁止されております。"],
     },
   },
 ];
@@ -92,20 +53,34 @@ function normalizeText(text) {
   return text.replace(/\s+/g, " ").trim();
 }
 
-function checkRule({ target, areaId, rule }) {
+function getDisplayText(rule) {
+  if (rule instanceof RegExp) {
+    return "アルコール度数〇%です。";
+  }
+
+  return `「${rule}」`;
+}
+
+function checkTextRule({ text, rule }) {
+  if (rule instanceof RegExp) {
+    return rule.test(text);
+  }
+
+  return text.includes(normalizeText(rule));
+}
+
+function checkRule({ target, areaId, rule, index }) {
   const area = textAreas[areaId];
   const element = target.querySelector(area.selector);
   const text = normalizeText(element?.textContent ?? "");
-  const ok = rule.expectedPattern
-    ? rule.expectedPattern.test(text)
-    : text.includes(rule.expectedText);
+  const ok = checkTextRule({ text, rule });
+  const displayText = getDisplayText(rule);
 
   return {
-    id: `${areaId}-${rule.id}`,
+    id: `${areaId}-${index}-${displayText}`,
     areaId,
     areaLabel: area.label,
-    label: rule.label,
-    displayText: rule.expectedText ? `「${rule.expectedText}」` : rule.label,
+    displayText,
     ok,
     message: !element
       ? `${area.selector} が見つかりません`
@@ -117,7 +92,7 @@ function checkRule({ target, areaId, rule }) {
 
 function runGroupChecks({ target, group }) {
   return Object.entries(group.rules).flatMap(([areaId, rules]) =>
-    rules.map((rule) => checkRule({ target, areaId, rule }))
+    rules.map((rule, index) => checkRule({ target, areaId, rule, index }))
   );
 }
 
@@ -131,4 +106,4 @@ export function runTextChecks(target) {
       items: runGroupChecks({ target, group }),
     })),
   };
-};
+}
