@@ -1,5 +1,6 @@
 import { runTextChecks } from "./textChecks";
 import { runHtmlChecks } from "./htmlChecks";
+import { runFontColorChecks } from "./fontColorChecks";
 
 function getCheckTarget() {
   return document.querySelector("main") ?? document.body;
@@ -11,6 +12,7 @@ export function runChecks() {
   return [
     runTextChecks(target),
     runHtmlChecks(target),
+    runFontColorChecks(target),
     {
       id: "tab3",
       label: "タブ3",

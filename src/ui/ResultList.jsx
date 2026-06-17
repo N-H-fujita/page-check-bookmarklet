@@ -22,21 +22,43 @@ function groupItemsByArea(items) {
   }, []);
 }
 
+function getResultStatus(item) {
+  if (item.status) {
+    return item.status;
+  }
+
+  return item.ok ? "ok" : "ng";
+}
+
+function getStatusIcon(status) {
+  switch (status) {
+    case "ok":
+      return "✅";
+    case "ng":
+      return "❌";
+    case "skip":
+      return "➖";
+    default:
+      return "❔";
+  }
+}
+
 function ResultItems({ items }) {
   return (
     <ul className="bc-result-list">
-      {items.map((item) => (
-        <li
-          key={item.id}
-          className={`bc-result-item ${item.ok ? "is-ok" : "is-ng"}`}
-        >
-          <div className="bc-result-label">
-            <span>{item.ok ? "✅" : "❌"}</span>
-            <strong>{item.displayText ?? item.label}</strong>
-          </div>
-          <p className="bc-result-message">{item.message}</p>
-        </li>
-      ))}
+      {items.map((item) => {
+        const status = getResultStatus(item);
+
+        return (
+          <li key={item.id} className={`bc-result-item is-${status}`}>
+            <div className="bc-result-label">
+              <span>{getStatusIcon(status)}</span>
+              <strong>{item.displayText ?? item.label}</strong>
+            </div>
+            <p className="bc-result-message">{item.message}</p>
+          </li>
+        );
+      })}
     </ul>
   );
 }
