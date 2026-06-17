@@ -56,14 +56,14 @@
   margin-top: 12px;
 }
 
-.bc-sub-tab-list {
+.bc-result-group-tab-list {
   margin-bottom: 12px;
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
 }
 
-.bc-sub-tab {
+.bc-result-group-tab {
   padding: 5px 8px;
   background: #fff;
   border: 1px solid #bbb;
@@ -72,13 +72,13 @@
   cursor: pointer;
 }
 
-.bc-sub-tab.is-active {
+.bc-result-group-tab.is-active {
   background: #e8e8e8;
   border-color: #555;
   font-weight: bold;
 }
 
-.bc-sub-content {
+.bc-result-group-content {
   padding: 10px;
   background: #fafafa;
   border: 1px solid #eee;
