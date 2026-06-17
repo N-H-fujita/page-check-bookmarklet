@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Tabs from "./ui/Tabs";
-import SubTabs from "./ui/SubTabs";
+import ResultGroupTabs from "./ui/ResultGroupTabs";
 import ResultList from "./ui/ResultList";
 
 export default function App({ onClose, results }) {
@@ -27,8 +27,8 @@ export default function App({ onClose, results }) {
       <div className="bc-content">
         {activeResult?.groups?.length > 1
           ? (
-            <SubTabs
-              tabs={activeResult.groups}
+            <ResultGroupTabs
+              groups={activeResult.groups}
               renderContent={(activeGroupId) => {
                 const group = activeResult.groups.find((group) => group.id === activeGroupId);
                 return <ResultList items={group?.items ?? []} />;
